@@ -14,9 +14,7 @@ var upload = multer({ dest: 'uploads/' });
  */
 router.post('/upload', upload.single('image'), function (req, res, next) {
 	console.log("Front-end is calling !");
-    console.log(req.body.organ);
-    res.end();
-    //res.json({status: 'success', data: 'Fichier chargé.'});
+    res.json({status: 'success', data: 'Fichier chargé.\nOrgane sélectionné : ' + req.body.organ});
 });
 
 module.exports = router;
