@@ -1,12 +1,11 @@
 var exec = require('child_process').exec;
-var cmd; // La commande à exécuter avec les arguments
+var cmd = "../../code/src/testing.out ../../data/training/leaf/ 1 3000";
 
-exec(cmd, function (error, stdout, stderr) {
-    console.log('stdout:', stdout);
-    console.log('stderr:', stderr);
-    if (error !== null) {
-        console.log('exec error:', error);
-    }
-});
+var myRun = function() {
+    var process = exec(cmd);
+    process.stdout.on('data', function(data) {
+        console.log(data);
+    });
+};
 
-exports.exec = exec;
+exports.myRun = myRun;
