@@ -13,7 +13,7 @@ var multer = require('multer');
 var uploads = multer({
     dest: 'uploads/',
     rename: function (fieldname, filename) {
-        console.log("Rename...");
+        console.log("Renaming...");
         return filename + Date.now();
     },
     onFileUploadStart: function () {
@@ -23,6 +23,8 @@ var uploads = multer({
         console.log("File uploaded");
     }
 });
+
+var fs = require('fs');
 
 var process = require('../modules/run');
 
@@ -34,10 +36,12 @@ var startRecog = function (callback) {
 }
 
 var recogIsDone = function (req, res, next) {
-   res.json({
-            status: 'success',
-            data: ["Robinia pseudoacacia", "Quercus pubescens", "Castanea sativa", "Salix fragilis"]
-        });
+    var obj = JSON.parse(fs.readFileSync('uploads/test.json', 'utf8'));
+    console.log(obj);
+    res.json({
+        status: 'success',
+        data: ["Robinia pseudoacacia", "Quercus pubescens", "Castanea sativa", "Salix fragilis"]
+    });
 }
 
 /**
