@@ -33,7 +33,7 @@ var startRecog = function (callback) {
 };
 
 var recogIsDone = function (req, res, next) {
-    var obj = JSON.parse(fs.readFileSync('uploads/test.json', 'utf8'));
+    var obj = JSON.parse(fs.readFileSync('logs/log.json', 'utf8'));
     res.json(obj);
 };
 
