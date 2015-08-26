@@ -29,20 +29,13 @@ var fs = require('fs');
 var process = require('../modules/run');
 
 var startRecog = function (callback) {
-    process.myRun();
-    if (callback && typeof(callback) === "function") {
-        callback(req, res, next);
-    }
-}
+    process.myRun(callback);
+};
 
 var recogIsDone = function (req, res, next) {
     var obj = JSON.parse(fs.readFileSync('uploads/test.json', 'utf8'));
-    console.log(obj);
-    res.json({
-        status: 'success',
-        data: ["Robinia pseudoacacia", "Quercus pubescens", "Castanea sativa", "Salix fragilis"]
-    });
-}
+    res.json(obj);
+};
 
 /**
  * Upload d'une image
@@ -50,7 +43,9 @@ var recogIsDone = function (req, res, next) {
 router.post('/upload', uploads.single('image'), function (req, res, next) {
     console.log("Front-end is calling");
     console.log(req.body.organ);
-    startRecog(recogIsDone(req, res, next));
+    startRecog(function () {
+        recogIsDone(req, res, next);
+    });
 });
 
 module.exports = router;
