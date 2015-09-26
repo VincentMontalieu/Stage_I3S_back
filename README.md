@@ -14,3 +14,9 @@ There are two ways to run this server:
 * Run `npm start` from project directory.
 
 * Run `node bin/www` from project directory.
+
+## Running the server continuously
+
+I recommend using [Forever](https://github.com/foreverjs/forever).
+
+* Run `forever start bin/www` from project directory.
